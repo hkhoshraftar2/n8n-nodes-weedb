@@ -1,74 +1,153 @@
-# n8n-nodes-weedb: Revolutionizing Local Storage in n8n
+# 🚀 WeeDB: Persistent Data Storage for n8n
 
-**n8n-nodes-weedb** is a custom node for n8n that seamlessly integrates with WeeDB, a lightweight, file-based local JSON database. This integration addresses common challenges associated with local data storage in n8n workflows, providing an efficient and reliable solution.
+<div align="center">
+  <img src="weedb_logo.png" alt="WeeDB Logo" width="200"/>
+  <br/>
+  <strong>Finally, a reliable way to store persistent data in n8n custom nodes!</strong>
+</div>
 
-## Why n8n-nodes-weedb?
+## 🎯 The Problem
 
-Managing local storage in n8n can be complex, especially when dealing with large datasets or requiring persistent data across executions. Users have reported challenges such as increased memory consumption and workflow instability when handling substantial data volumes ([source](https://community.n8n.io/t/how-to-work-with-large-file-sizes-in-n8n-downloading-into-n8n-then-uploading-to-a-cloud-storage-service/30367?utm_source=chatgpt.com)).
+One of the most challenging aspects of n8n custom node development has been persistent data storage. Common issues include:
 
-Additionally, issues like the inability to load local CSV files correctly have been observed, indicating limitations in n8n's native file handling capabilities ([source](https://community.n8n.io/t/problem-loading-local-csv-file/71634?utm_source=chatgpt.com)).
+- Data loss during node updates
+- No built-in persistent storage solution
+- State management complexity
 
-**n8n-nodes-weedb** offers a robust solution by providing a dedicated, efficient local storage mechanism, ensuring your workflows remain performant and reliable.
+## 💡 The Solution
 
-## Key Features
+WeeDB solves these challenges by providing:
 
-- **Lightweight Local Storage:** Efficiently store data locally without the overhead of external databases.
-- **Simple CRUD Operations:** Easily perform Create, Read, Update, and Delete operations within your workflows.
-- **Key-Value Store Support:** Manage data using a straightforward key-value paradigm.
-- **Fully Asynchronous and Dependency-Free:** Ensures non-blocking operations and minimal dependencies.
-- **Singleton Access Pattern:** Guarantees a single point of access to the database, preventing conflicts.
-- **Fast and Reliable for Small-Scale Workflows:** Optimized for quick data retrieval and storage in lightweight applications.
+1. **True Persistence** 
+   - Data stored in user's home directory (`~/.weedb/`)
+   - Survives node updates and reinstalls
+   - Cross-platform compatibility
 
-## Installation
+2. **Simple API**
+   ```javascript
+   // Store data that persists!
+   await weeDB.create({ key: "settings", value: "important-data" });
+   ```
+
+3. **Reliable Architecture**
+   ```
+   ~/.weedb/
+   ├── database1.json
+   ├── database2.json
+   └── settings/
+       └── config.json
+   ```
+
+## ⚡ Features
+
+### 1. Persistent Storage
+- ✅ Survives node updates
+- ✅ Survives n8n restarts
+- ✅ Cross-platform support
+
+### 2. Rich Operations
+- 🔍 Pattern-based search
+- 🗑️ Bulk operations
+- 🔄 Atomic updates
+
+### 3. Safety Features
+- 🧪 Dry run mode
+- ⚠️ Operation confirmation
+- 🔒 Data integrity checks
+
+## 🛠️ Installation
 
 ```bash
 npm install n8n-nodes-weedb
 ```
 
-## Usage
+## 📚 Documentation
 
-After installation, you can:
+### Basic Usage
+```javascript
+// Store persistent data
+WeeDB Create: { 
+    key: "config", 
+    value: { setting: "value" } 
+}
 
-- Perform CRUD operations on structured items.
-- Store and retrieve key-value data.
-- Search keys using regex patterns.
-
-WeeDB stores data in a local `.json` file, making it ideal for quick, temporary data storage in automation workflows.
-
-## Example Use Cases
-
-- **Store Temporary User Sessions:** Maintain user state between workflow executions.
-- **Cache External API Responses:** Reduce redundant API calls by caching responses locally.
-- **Maintain Key-Value Settings Between Executions:** Persist configuration settings or flags across workflow runs.
-
-## Test Coverage
-
-All core functionalities of WeeDB are covered by automated integration tests:
-
-- Item creation, reading, updating, deletion.
-- Listing and verifying items.
-- Key-value set/get/remove operations.
-- Key pattern search using RegExp.
-
-To run the tests:
-
-```bash
-node test_runner.js
+// Retrieve anytime, anywhere
+WeeDB Get: { 
+    mode: "single", 
+    key: "config" 
+}
 ```
 
-Successful output will confirm all logic paths are covered.
+### Advanced Features
+```javascript
+// Pattern-based removal
+WeeDB Remove: { 
+    mode: "pattern",
+    pattern: "temp_*",
+    options: { dryRun: true }
+}
+```
 
-## Author
+## ⭐ Support the Project
 
-Created and maintained by Hossein Khoshraftar  
-GitHub: [@hkhoshraftar2](https://github.com/hkhoshraftar2)
+If you find WeeDB helpful, please consider giving it a star on GitHub! It helps make the project more visible to other n8n developers.
 
-## License
+<div align="center">
+  <a href="https://github.com/hkhoshraftar2/n8n-nodes-weedb">
+    <img src="https://img.shields.io/github/stars/hkhoshraftar2/n8n-nodes-weedb?style=social" alt="GitHub stars">
+  </a>
+  
+  <p>
+    <strong>Every star makes a difference!</strong><br/>
+    Click the badge above to star the project on GitHub
+  </p>
+</div>
 
-MIT License
+### Why Star?
+- Help other developers find this solution
+- Show your appreciation for the project
+- Stay updated on new features and releases
+- Join our growing community of n8n developers
+
+## 🎯 Real-World Use Cases
+
+1. **Configuration Storage**
+   - Store API credentials
+   - Save user preferences
+   - Maintain state between workflows
+
+2. **Cache Management**
+   - Store API response cache
+   - Maintain rate limit counters
+   - Save temporary processing results
+
+3. **Workflow State**
+   - Track long-running operations
+   - Store checkpoint data
+   - Maintain audit logs
+
+## 🤝 Contributing
+
+Found a bug? Have a feature request? We'd love to hear from you! Check out our [contribution guidelines](CONTRIBUTING.md).
+
+## 📜 License
+
+MIT © [Hossein Khoshraftar](https://github.com/hkhoshraftar2)
 
 ---
 
-If you find **n8n-nodes-weedb** valuable, please consider giving it a star on GitHub. Your support helps us continue to improve and maintain this project.
+<div align="center">
+  <strong>Built with ❤️ for the n8n community</strong>
+  <br/>
+  <br/>
+  <a href="https://github.com/hkhoshraftar2/n8n-nodes-weedb/stargazers">⭐ Star us on GitHub</a>
+</div>
 
-[![GitHub Stars](https://img.shields.io/github/stars/hkhoshraftar2/n8n-nodes-weedb?style=social)](https://github.com/hkhoshraftar2/n8n-nodes-weedb)
+__      __          ______ ____  
+/\ \  __/\ \        /\  _  \  _ \ 
+\ \ \/\ \ \ \  __   \ \ \L\ \ \ \ \
+ \ \ \ \ \ \ \L\ \   \ \  __ \ \ \ \
+  \ \ \_/ \ \____/    \ \ \L\ \ \_\ \
+   \ `\___/\/___/      \ \_____\/\_\/
+    `\/__/              \/_____/\/_/
+         WeeDB - Tiny but Mighty
