@@ -10,12 +10,12 @@ class WeeDBKeyValueRemove {
         this.description = {
             displayName: 'WeeDB Key Value Remove',
             name: 'weeDBKeyValueRemove',
-            group: ['transform'],
+            group: ['WeeDB'],
             version: 3,
             description: 'Remove WeeDB KeyValue',
             defaults: {
                 color: '#ff9900',
-                name: 'weeDBKeyValueCreate',
+                name: 'weeDBKeyValueRemove',
             },
             inputs: ["main"],
             outputs: ["main"],

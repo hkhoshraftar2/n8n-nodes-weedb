@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-weedb",
-  "version": "1.0.74",
+  "version": "1.0.79",
   "description": "",
   "keywords": [
     "n8n-community-node-package"
@@ -9,7 +9,7 @@
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hkhoshraftar2/n8n-nodes-metisai"
+    "url": "https://github.com/hkhoshraftar2/n8n-nodes-weedb"
   },
   "author": {
     "name": "Hossein Khoshraftar",
@@ -40,7 +40,8 @@
       "dist/nodes/WeeDBNode/WeeDBStringCreate.node.js",
       "dist/nodes/WeeDBNode/WeeDBKeyValueCreate.node.js",
       "dist/nodes/WeeDBNode/WeeDBKeyValueGet.node.js",
-      "dist/nodes/WeeDBNode/WeeDBKeyValueRemove.node.js"
+      "dist/nodes/WeeDBNode/WeeDBKeyValueRemove.node.js",
+      "dist/nodes/WeeDBNode/WeeDBObjectCreate.node.js"
     ]
   },
   "devDependencies": {

@@ -12,12 +12,12 @@ export class WeeDBKeyValueRemove implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'WeeDB Key Value Remove',
 		name: 'weeDBKeyValueRemove',
-		group: ['transform'],
+		group: ['WeeDB'],
 		version: 3,
 		description: 'Remove WeeDB KeyValue',
 		defaults: {
 			color: '#ff9900',
-			name: 'weeDBKeyValueCreate',
+			name: 'weeDBKeyValueRemove',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],

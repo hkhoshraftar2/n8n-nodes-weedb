@@ -69,6 +69,13 @@ class WeeDB {
         await this.saveData();
         return newItem;
     }
+    async createObject(item) {
+        await this.loadData();
+        const newItem = { id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`, item };
+        this.dataCache.items.push(newItem);
+        await this.saveData();
+        return newItem;
+    }
     async read(id) {
         await this.loadData();
         return this.dataCache.items.find(item => item.id === id) || null;

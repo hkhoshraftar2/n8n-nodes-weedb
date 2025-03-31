@@ -3,21 +3,22 @@ import type {
 	INodeExecutionData,
 	INodeType,
 	INodeTypeDescription,
+	JsonObject,
 } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
 import WeeDB from '../../src/WeeDB';
 
  
-export class WeeDBStringCreate implements INodeType {
+export class WeeDBObjectCreate implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'WeeDB String Create',
-		name: 'weeDBStringCreate',
+		displayName: 'WeeDB  Create Object',
+		name: 'weeDBObjectCreate',
 		group: ['WeeDB'],
 		version: 3,
-		description: 'Create a new WeeDB string',
+		description: 'Create a new WeeDB object',
 		defaults: {
 			color: '#ff9900',
-			name: 'weeDBStringCreate',
+			name: 'weeDBObjectCreate',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
@@ -31,31 +32,23 @@ export class WeeDBStringCreate implements INodeType {
 			{
 				displayName: 'Data',
 				name: 'data',
-				type: 'string',
+				type: 'json',
 				default: '',
-				placeholder: 'String Data to save',
-				description: 'Strign Data to save',
+				placeholder: 'Object Data to save',
+				description: 'Object Data to save',
 			}
 		],
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-
-
 		const credentials = await this.getCredentials('weeDBConnection');
 		const apiKey = credentials.databaseId as string;
-		let data = this.getNodeParameter('data', 0) as string;
+		let dataObject = this.getNodeParameter('data', 0) as JsonObject;
 
 		const weeDB = WeeDB.getInstance(apiKey);
 		if (!weeDB) throw new Error('Failed to initialize WeeDB');
-		const item = await weeDB.create({data});
-		
-		// const initialMessageType = this.getNodeParameter('initialMessageType', 0) as string;
-		// const initialMessage = this.getNodeParameter('initialMessage', 0) as string;
+		const item = await weeDB.createObject(dataObject);
 
-		// let prompt = this.getNodeParameter('prompt', 0) as string;
-
-	
 		
 		return [this.helpers.returnJsonArray({item})];
 

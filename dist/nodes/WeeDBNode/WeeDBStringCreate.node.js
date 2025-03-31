@@ -10,7 +10,7 @@ class WeeDBStringCreate {
         this.description = {
             displayName: 'WeeDB String Create',
             name: 'weeDBStringCreate',
-            group: ['transform'],
+            group: ['WeeDB'],
             version: 3,
             description: 'Create a new WeeDB string',
             defaults: {

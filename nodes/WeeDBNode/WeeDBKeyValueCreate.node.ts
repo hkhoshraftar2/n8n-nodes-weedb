@@ -12,7 +12,7 @@ export class WeeDBKeyValueCreate implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'WeeDB Key Value Create',
 		name: 'weeDBKeyValueCreate',
-		group: ['transform'],
+		group: ['WeeDB'],
 		version: 3,
 		description: 'Create a new WeeDB KeyValue',
 		defaults: {

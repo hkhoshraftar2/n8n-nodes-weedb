@@ -10,12 +10,12 @@ class WeeDBKeyValueGet {
         this.description = {
             displayName: 'WeeDB Key Value Get',
             name: 'weeDBKeyValueGet',
-            group: ['transform'],
+            group: ['WeeDB'],
             version: 3,
-            description: 'Get a new WeeDB KeyValue',
+            description: 'Get WeeDB KeyValue',
             defaults: {
                 color: '#ff9900',
-                name: 'weeDBKeyValueCreate',
+                name: 'weeDBKeyValueGet',
             },
             inputs: ["main"],
             outputs: ["main"],

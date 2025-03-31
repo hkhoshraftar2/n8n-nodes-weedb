@@ -9,6 +9,7 @@ declare class WeeDB {
     loadData(): Promise<void>;
     saveData(): Promise<void>;
     create(item: any): Promise<any>;
+    createObject(item: any): Promise<any>;
     read(id: any): Promise<any>;
     update(id: any, updatedFields: any): Promise<any>;
     delete(id: any): Promise<boolean>;
