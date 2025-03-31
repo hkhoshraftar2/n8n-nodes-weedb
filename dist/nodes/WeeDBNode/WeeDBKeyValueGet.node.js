@@ -33,7 +33,26 @@ class WeeDBKeyValueGet {
                     default: '',
                     placeholder: 'Key to save',
                     description: 'Key to save',
-                }
+                },
+                {
+                    displayName: 'Single or All',
+                    name: 'singleOrAll',
+                    type: 'options',
+                    noDataExpression: true,
+                    options: [
+                        {
+                            name: 'Single',
+                            value: 'single',
+                            description: 'Get a value by key',
+                        },
+                        {
+                            name: 'Search Keys',
+                            value: 'searchKeys',
+                            description: 'Search for keys by regex pattern and return all',
+                        },
+                    ],
+                    default: 'single',
+                },
             ],
         };
     }
@@ -41,10 +60,17 @@ class WeeDBKeyValueGet {
         const credentials = await this.getCredentials('weeDBConnection');
         const apiKey = credentials.databaseId;
         let key = this.getNodeParameter('key', 0);
+        let singleOrAll = this.getNodeParameter('singleOrAll', 0);
         const weeDB = WeeDB_1.default.getInstance(apiKey);
         if (!weeDB)
             throw new Error('Failed to initialize WeeDB');
-        const item = await weeDB.get(key);
+        let item = null;
+        if (singleOrAll === 'single') {
+            item = await weeDB.get(key);
+        }
+        else if (singleOrAll === 'searchKeys') {
+            item = await weeDB.searchKeys(key);
+        }
         return [this.helpers.returnJsonArray({ item })];
     }
 }

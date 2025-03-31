@@ -35,7 +35,27 @@ export class WeeDBKeyValueGet implements INodeType {
 				default: '',
 				placeholder: 'Key to save',
 				description: 'Key to save',
-			}
+			},
+			 {
+				displayName: 'Single or All',
+				name: 'singleOrAll',
+				type: 'options',
+				noDataExpression: true, // Prevents using expressions in the selection
+				options: [
+					{
+						name: 'Single',
+						value: 'single',
+						description: 'Get a value by key',
+					},
+					
+					{
+						name: 'Search Keys',
+						value: 'searchKeys',
+						description: 'Search for keys by regex pattern and return all',
+					},
+				],
+				default: 'single',
+			},
 		],
 	};
 
@@ -46,16 +66,19 @@ export class WeeDBKeyValueGet implements INodeType {
 		const apiKey = credentials.databaseId as string;
 
 		let key = this.getNodeParameter('key', 0) as string;
-		// let value = this.getNodeParameter('value', 0) as string;
+		let singleOrAll = this.getNodeParameter('singleOrAll', 0) as string;
 
 		const weeDB = WeeDB.getInstance(apiKey);
 		if (!weeDB) throw new Error('Failed to initialize WeeDB');
-		const item = await weeDB.get(key);
-		
-		// const initialMessageType = this.getNodeParameter('initialMessageType', 0) as string;
-		// const initialMessage = this.getNodeParameter('initialMessage', 0) as string;
 
-		// let prompt = this.getNodeParameter('prompt', 0) as string;
+
+		let item = null;
+		if (singleOrAll === 'single') {
+			item = await weeDB.get(key);
+		} else if (singleOrAll === 'searchKeys') {
+			item = await weeDB.searchKeys(key);
+		}
+
 		return [this.helpers.returnJsonArray({item})];
 
 	}
