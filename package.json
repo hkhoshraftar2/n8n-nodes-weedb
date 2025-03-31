@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-weedb",
-  "version": "1.0.79",
+  "version": "1.0.85",  
   "description": "",
   "keywords": [
     "n8n-community-node-package"
@@ -41,7 +41,11 @@
       "dist/nodes/WeeDBNode/WeeDBKeyValueCreate.node.js",
       "dist/nodes/WeeDBNode/WeeDBKeyValueGet.node.js",
       "dist/nodes/WeeDBNode/WeeDBKeyValueRemove.node.js",
-      "dist/nodes/WeeDBNode/WeeDBObjectCreate.node.js"
+      "dist/nodes/WeeDBNode/WeeDBObjectCreate.node.js",
+      "dist/nodes/WeeDBNode/WeeDBDataGet.node.js",
+      "dist/nodes/WeeDBNode/WeeDBDataDelete.node.js",
+      "dist/nodes/WeeDBNode/WeeDBObjectUpdate.node.js",
+      "dist/nodes/WeeDBNode/WeeDBStringUpdate.node.js"  
     ]
   },
   "devDependencies": {
