@@ -16,6 +16,7 @@ declare class WeeDB {
     set(key: any, value: any): Promise<boolean>;
     get(key: any): Promise<any>;
     remove(key: any): Promise<boolean>;
+    removeKeysByPattern(pattern: any): Promise<any>;
     getAllKeys(): Promise<string[]>;
     searchKeys(pattern: any): Promise<any[]>;
 }

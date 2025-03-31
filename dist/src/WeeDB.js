@@ -114,6 +114,24 @@ class WeeDB {
         }
         return false;
     }
+    async removeKeysByPattern(pattern) {
+        await this.loadData();
+        const regex = new RegExp(pattern);
+        const removedKeys = [];
+        for (const key in this.dataCache.keyValues) {
+            if (regex.test(key)) {
+                delete this.dataCache.keyValues[key];
+                removedKeys.push(key);
+            }
+        }
+        if (removedKeys.length > 0) {
+            await this.saveData();
+        }
+        return {
+            removed: removedKeys,
+            count: removedKeys.length
+        };
+    }
     async getAllKeys() {
         await this.loadData();
         return Object.keys(this.dataCache.keyValues);

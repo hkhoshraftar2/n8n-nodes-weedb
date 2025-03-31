@@ -8,13 +8,13 @@ import { NodeConnectionType } from 'n8n-workflow';
 import WeeDB from '../../src/WeeDB';
 
  
-export class WeeDBKeyValueGet implements INodeType {
+export class WeeDBKeyValueRemove implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'WeeDB Key Value Get',
-		name: 'weeDBKeyValueGet',
+		displayName: 'WeeDB Key Value Remove',
+		name: 'weeDBKeyValueRemove',
 		group: ['transform'],
 		version: 3,
-		description: 'Get a new WeeDB KeyValue',
+		description: 'Remove WeeDB KeyValue',
 		defaults: {
 			color: '#ff9900',
 			name: 'weeDBKeyValueCreate',
@@ -53,8 +53,8 @@ export class WeeDBKeyValueGet implements INodeType {
 				name: 'key',
 				type: 'string',
 				default: '',
-				placeholder: 'Key to Fetch',
-				description: 'Key to Fetch',
+				placeholder: 'Key to remove',
+				description: 'Key to remove',
 			}
 			
 		],
@@ -75,9 +75,9 @@ export class WeeDBKeyValueGet implements INodeType {
 
 		let item = null;
 		if (singleOrAll === 'single') {
-			item = await weeDB.get(key);
+			item = await weeDB.remove(key);
 		} else if (singleOrAll === 'searchKeys') {
-			item = await weeDB.searchKeys(key);
+			item = await weeDB.removeKeysByPattern(key);
 		}
 
 		return [this.helpers.returnJsonArray({item})];

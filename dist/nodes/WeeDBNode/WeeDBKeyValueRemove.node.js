@@ -3,16 +3,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeeDBKeyValueGet = void 0;
+exports.WeeDBKeyValueRemove = void 0;
 const WeeDB_1 = __importDefault(require("../../src/WeeDB"));
-class WeeDBKeyValueGet {
+class WeeDBKeyValueRemove {
     constructor() {
         this.description = {
-            displayName: 'WeeDB Key Value Get',
-            name: 'weeDBKeyValueGet',
+            displayName: 'WeeDB Key Value Remove',
+            name: 'weeDBKeyValueRemove',
             group: ['transform'],
             version: 3,
-            description: 'Get a new WeeDB KeyValue',
+            description: 'Remove WeeDB KeyValue',
             defaults: {
                 color: '#ff9900',
                 name: 'weeDBKeyValueCreate',
@@ -50,8 +50,8 @@ class WeeDBKeyValueGet {
                     name: 'key',
                     type: 'string',
                     default: '',
-                    placeholder: 'Key to Fetch',
-                    description: 'Key to Fetch',
+                    placeholder: 'Key to remove',
+                    description: 'Key to remove',
                 }
             ],
         };
@@ -66,13 +66,13 @@ class WeeDBKeyValueGet {
             throw new Error('Failed to initialize WeeDB');
         let item = null;
         if (singleOrAll === 'single') {
-            item = await weeDB.get(key);
+            item = await weeDB.remove(key);
         }
         else if (singleOrAll === 'searchKeys') {
-            item = await weeDB.searchKeys(key);
+            item = await weeDB.removeKeysByPattern(key);
         }
         return [this.helpers.returnJsonArray({ item })];
     }
 }
-exports.WeeDBKeyValueGet = WeeDBKeyValueGet;
-//# sourceMappingURL=WeeDBKeyValueGet.node.js.map
+exports.WeeDBKeyValueRemove = WeeDBKeyValueRemove;
+//# sourceMappingURL=WeeDBKeyValueRemove.node.js.map
