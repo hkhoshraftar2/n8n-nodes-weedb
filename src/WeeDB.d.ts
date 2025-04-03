@@ -12,6 +12,8 @@ declare class WeeDB {
     createObject(item: any): Promise<any>;
     read(id: any): Promise<any>;
     update(id: any, updatedFields: any): Promise<any>;
+    createOrUpdateObject(id: any, updatedFields: any): Promise<any>;
+    createOrUpdateString(id: any, updatedFields: any): Promise<any>;
     delete(id: any): Promise<boolean>;
     list(): Promise<any>;
     set(key: any, value: any): Promise<boolean>;

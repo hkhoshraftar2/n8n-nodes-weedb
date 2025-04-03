@@ -94,6 +94,32 @@ class WeeDB {
         await this.saveData();
         return this.dataCache.items[itemIndex];
     }
+    async createOrUpdateString(id, updatedFields) {
+        await this.loadData();
+        const itemIndex = this.dataCache.items.findIndex(item => item.id === id);
+        if (itemIndex === -1)
+           return this.create(updatedFields);
+        else
+        {
+            this.dataCache.items[itemIndex] = { ...this.dataCache.items[itemIndex], ...updatedFields };
+            await this.saveData();
+            return this.dataCache.items[itemIndex];
+        }
+       
+    }
+    async createOrUpdateObject(id, updatedFields) {
+        await this.loadData();
+        const itemIndex = this.dataCache.items.findIndex(item => item.id === id);
+        if (itemIndex === -1)
+           return this.create(updatedFields);
+        else
+        {
+            this.dataCache.items[itemIndex] = { ...this.dataCache.items[itemIndex], updatedFields };
+            await this.saveData();
+            return this.dataCache.items[itemIndex];
+        }
+       
+    }
     async delete(id) {
         await this.loadData();
         const initialLength = this.dataCache.items.length;

@@ -44,6 +44,13 @@ export class WeeDBObjectUpdate implements INodeType {
 				default: '',
 				placeholder: 'Object Data to Update',
 				description: 'Object Data to Update',
+			},
+			{
+				displayName: 'Cerate',
+				name: 'create',
+				type: 'boolean',
+				default: false,
+				description: 'Create record if not exist',
 			}
 		],
 	};
@@ -55,10 +62,17 @@ export class WeeDBObjectUpdate implements INodeType {
 		const apiKey = credentials.databaseId as string;
 		let data = this.getNodeParameter('data', 0) as JsonObject;
 		let id = this.getNodeParameter('id', 0) as string;
+		let create = this.getNodeParameter('create', 0) as boolean;
+
 		const weeDB = WeeDB.getInstance(apiKey);
 		if (!weeDB) throw new Error('Failed to initialize WeeDB');
-		const item = await weeDB.update(id, data);
-		
+
+		let item = null;
+		if (create)
+			item = await weeDB.createOrUpdateString(id,  data );
+		else
+			item = await weeDB.update(id,  data);
+
 		
 		return [this.helpers.returnJsonArray({item})];
 
